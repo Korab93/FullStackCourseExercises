@@ -1,1 +1,23 @@
+...mermaid
+sequenceDiagram
+    participant browser
+    participant server
 
+    browser->>server: Visit https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server
+    server-->>browser: Deliver HTML, spa.js, and necessary resources
+    deactivate server
+
+    Note right of browser: User interacts with the SPA version
+
+    browser->>server: Create new note via SPA interface
+    activate server
+    server-->>browser: Status code 201 (Created), no further requests
+    deactivate server
+
+    Note right of browser: SPA handles note creation via JavaScript
+
+    browser->>server: POST to /new_note_spa with new note as JSON
+    activate server
+    server-->>browser: Status code 201 (Created)
+    deactivate server
